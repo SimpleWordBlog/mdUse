@@ -10,35 +10,36 @@ jobs:
     runs-on: windows-latest  # 使用 Windows 环境
 
     steps:
-      # 检出代码
+      # 1. 检出代码
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 设置 Python 环境
+      # 2. 设置 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'  # 使用 Python 3.11
 
-      # 安装依赖
+      # 3. 安装依赖
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller  # 安装 PyInstaller
 
-      # 使用 PyInstaller 构建项目
+      # 4. 使用 PyInstaller 打包项目为单个 exe 文件
       - name: Build with PyInstaller
         run: |
-          pyinstaller summarizer.spec
+          pyinstaller --onefile summarizer.py  # 打包为单个 exe 文件
+        # 如果你的项目入口文件不是 `summarizer.py`，修改为实际的入口文件名称
 
-      # 打包构建产物为 zip 文件
-      - name: Package build artifacts
+      # 5. 打包源码为 zip 文件
+      - name: Package source code
         run: |
-          cd dist
-          Compress-Archive -Path summarizer\* -DestinationPath summarizer.zip
+          Compress-Archive -Path "./*" -DestinationPath "./source_code.zip"
+        # 将整个项目源码压缩为 source_code.zip
 
-      # 上传构建产物到 GitHub Releases
+      # 6. 创建 GitHub Release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -50,12 +51,24 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      # 7. 上传 exe 文件到 Release
+      - name: Upload exe Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/summarizer.zip
-          asset_name: summarizer.zip
+          asset_path: dist/summarizer.exe
+          asset_name: summarizer.exe
+          asset_content_type: application/octet-stream
+
+      # 8. 上传源码 zip 文件到 Release
+      - name: Upload Source Code Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: source_code.zip
+          asset_name: source_code.zip
           asset_content_type: application/zip
