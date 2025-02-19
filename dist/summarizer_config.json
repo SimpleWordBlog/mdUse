@@ -1,7 +1,0 @@
-{
-  "api_key": "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",
-  "model": "llama-3.3-70b-versatile",
-  "rate_limit": 30,
-  "summary_length": 200,
-  "directory": ""
-}
