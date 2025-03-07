@@ -27,7 +27,8 @@ jobs:
 
       - name: 使用 PyInstaller 构建 EXE
         run: |
-          pyinstaller --onefile --windowed --icon=icon.ico --name=MarkdownSummarizer 1.py
+          pyinstaller --onefile --windowed --icon=ico.ico --name=MarkdownSummarizer 1.py
+    
 
       - name: 创建发布
         id: create_release
