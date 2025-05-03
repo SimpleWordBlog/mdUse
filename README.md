@@ -12,9 +12,6 @@
 + 失败重试：支持对处理失败的文件进行重试
 
 ## 效果
+![](https://img.simpleword.bid/file/AgACAgQAAyEGAASeBiYcAAM4aBXxk9uHkb3rUX-hu-PfbJdbhrsAAo_NMRsmHbFQXWdHGkKvIVYBAAMCAAN5AAM2BA.png)
 
-![image-20250419002237553](https://img.simpleword.bid/20250419002237985.webp)
-
-![image-20250419002448995](https://img.simpleword.bid/20250419002449134.webp)
-
-![image-20250419002250712](https://img.simpleword.bid/20250419002250863.webp)
+![](https://img.simpleword.bid/file/AgACAgQAAyEGAASeBiYcAAM5aBXxs4mD49HM8e1Bh2k5Kptud1kAApDNMRsmHbFQ0CM_fiOoJGgBAAMCAAN5AAM2BA.png)
